@@ -2,20 +2,15 @@ class Customer:
     def __init__(self, first_name, last_name, tier=('free', 0)):
         self.first_name = first_name
         self.last_name = last_name
-        self.tier = tier
+        self._tier = tier[0]
+        self._cost = tier[1]
            
-    def can_access(self, resource):
-        resource_tier = resource['tier']
-        flag = False
-        if resource_tier == 'free':
-            flag = True
-        elif self.tier[0] == resource_tier:
-            flag = True
-        return flag
+    def can_access(self, content):
+        return content['tier'] == 'free' or content['tier'] == self._tier
     
     # return billion for gien number of months
     def bill_for(self, num_months):
-        return self.tier[1] * num_months
+        return self._cost * num_months
     
     # factory method to create premium customer
     @classmethod
@@ -25,7 +20,7 @@ class Customer:
     # property function to retrun a customer full name 
     @property
     def name(self):
-        return self.first_name +' '+ self.last_name
+        return f"{self.first_name} {self.last_name}"
         
 
 
