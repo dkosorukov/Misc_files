@@ -21,6 +21,10 @@ class Customer:
     @property
     def name(self):
         return f"{self.first_name} {self.last_name}"
+
+    def __repr__(self):
+       return (f'{self.__class__.__name__} ('
+              f'{self.name!r}, tier: {self._tier!r}, cost: {self._cost!r} $/month)')
         
 
 
@@ -36,3 +40,6 @@ if __name__ == '__main__':
     print(victoria.can_access({'tier': 'premium', 'title': 'William Tell Overture'}))  # True
     print(victoria.bill_for(5))  # => 50 (5 months at 10$/mo)
     print(victoria.name)  # Alexandrina Victoria
+
+    print(marco)
+    print(victoria)
