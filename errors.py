@@ -2,22 +2,20 @@
 then "creates an account," which for our purposes just returns a tuple
 containing both the username and password."""
 
+class InvalidPasswordError(ValueError):
+    pass
+
 INVALID_PASSWORDS = (
     'password',
     'abc123',
     '123abc',
 )
-
-class InvalidPasswordError(Exception):
-    pass
-    
-
 def validate_password(username, password):
-    flag = password != username and password not in INVALID_PASSWORDS
-    if flag:
-        return flag
-    else:
-        raise InvalidPasswordError()
+    if password == username:
+        raise InvalidPasswordError('Passord cannot be the same as your username.')
+    if password in INVALID_PASSWORDS:
+        raise InvalidPasswordError('Password cannot be that simple.')
+    
 
 
 def create_account(username, password):
@@ -26,12 +24,14 @@ def create_account(username, password):
 
 def main(username, password):
     try:
-        valid = validate_password(username, password)
-    except InvalidPasswordError:
-        print ('Bad password')
+        print(f'username: {username!r}, password: {password!r}')
+        validate_password(username, password)
+    except InvalidPasswordError as err:
+        print (err)
     else:
         account = create_account(username, password)
-        print(f'username: {username!r}, password: {password!r}')
+        print("Validated password against username and simple passwords")
+        
     
 
 if __name__ == '__main__':
