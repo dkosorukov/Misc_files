@@ -8,7 +8,7 @@ class ImportInterface(ABC):
     allowed_extensions = []
 
     @classmethod
-    def can_ingest(cls, path):
+    def can_ingest(cls, path) -> bool:
         ext = path.split('.')[-1]
         return ext in cls.allowed_extensions
 
