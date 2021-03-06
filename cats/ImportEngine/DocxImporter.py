@@ -1,7 +1,6 @@
 from typing import List
 import docx
 
-
 from .ImporterInterface import ImportInterface
 from .Cat import Cat
 

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
-
 from typing import List
+
 from .Cat import Cat
 
 class ImportInterface(ABC):
