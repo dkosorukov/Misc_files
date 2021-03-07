@@ -6,19 +6,15 @@ import random
 from .ImporterInterface import ImportInterface
 from .Cat import Cat
 
-class PDFImporter(ImportInterface):
-    allowed_extensions = ['pdf']
+class TXTImporter(ImportInterface):
+    allowed_extensions = ['txt']
 
     @classmethod
     def parse(cls, path: str) -> List[Cat]:
         if not cls.can_ingest(path):
             raise Exception("Cannot ingest exception")
         
-        pdftotext = r'C:\Program Files\Git\mingw64\bin\pdftotext.exe'
-        tmp = f'./tmp/{random.randint(0,100000000)}.txt'
-        call = subprocess.run([pdftotext, '-layout', path, tmp])
-
-        file_ref = open(tmp, 'r')
+        file_ref = open(path, 'r')
         cats = []
         
         for line in file_ref.readlines():
@@ -28,6 +24,6 @@ class PDFImporter(ImportInterface):
                 new_cat = Cat(parse[0], int(parse[1]), bool(parse[2]))
                 cats.append(new_cat)
         file_ref.close()
-        os.remove(tmp)
+        
         return cats
 

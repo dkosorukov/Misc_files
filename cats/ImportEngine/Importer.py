@@ -5,10 +5,11 @@ from .Cat import Cat
 from .DocxImporter import DocxImporter
 from .CSVImporter import CSVImporter
 from .PDFImporter import PDFImporter
+from .TXTImporter import TXTImporter
 
 
 class Importer(ImportInterface):
-    importers = [DocxImporter, CSVImporter, PDFImporter]
+    importers = [DocxImporter, CSVImporter, PDFImporter, TXTImporter]
  
     @classmethod
     def parse(cls, path: str) -> List[Cat]:
